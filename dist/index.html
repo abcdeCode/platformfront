@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>接口测试平台</title><link rel=stylesheet href=https://unpkg.com/muse-ui/dist/muse-ui.css><script src=https://unpkg.com/muse-ui/dist/muse-ui.js></script><link rel="shortcut icon" href=./assets/logo.png type=image/x-icon><link rel=stylesheet href=https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css><link rel=stylesheet href=/static/css/main.css><link rel=stylesheet href=/static/css/demo.css><link rel=stylesheet href=/static/css/app.css><link rel=stylesheet href=/static/css/amazeui.min.css><link rel=stylesheet href=/static/css/admin.css><link rel=stylesheet href=/static/css/bootstrap.min.css><link rel=stylesheet href=/static/css/toastr.min.css><script src=https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js></script><script src=/static/js/bootstrap.js></script><script src=/static/js/echarts.min.js></script><script src=/static/js/app.js></script><script src=/static/js/toastr.min.js></script><script src=/static/js/iscroll.js></script><script src=/static/js/echarts.common.min.js></script><script src=/static/js/amazeui.min.js></script><script src=/static/js/bootstrap-multiselect.js></script><link href=./static/css/app.91faac1ad78c470193cd1fb32cf8d2e4.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.5bc0aa73c0233432ca99.js></script><script type=text/javascript src=./static/js/app.d8beee73bd1d8a6e8cf3.js></script></body><script>if(JSON.parse(localStorage.getItem("userid")!=null)){
+      var websocket = null;
+    if('WebSocket' in window){
+        websocket = new WebSocket('ws://localhost:9999/plan/websocket/'+JSON.parse(localStorage.getItem("userid")));
+    }else{
+        alert("该浏览器不支持WebSocket");
+    }
+ 
+    websocket.onopen = function (event) {
+        console.log("建立连接");
+    }
+ 
+    websocket.onclose = function (event) {
+        console.log("断开连接");
+    }
+ 
+    websocket.onmessage = function (event) {
+      toastr.success( event.data);
+    }
+ 
+    websocket.onerror = function (event) {
+        alert("websocket通信发生错误");
+    }
+ 
+    window.onbeforeunload = function (event) {
+        websocket.close();
+    }
+    }</script></html>
