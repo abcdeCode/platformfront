@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:9999';
+const BASE_URL = 'http://localhost';
 export default{
 	BASE_URL
 }

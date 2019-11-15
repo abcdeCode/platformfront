@@ -3,29 +3,7 @@ import base from '../libs/api.js'
 <template>
   <section>
     <mu-container class="demo-container">
-      <mu-appbar title="接口测试平台" :zDepth="3">
-        <mu-icon value="all_inclusive" color="#0091ea" slot="left"></mu-icon>
-        <mu-badge content="12" slot="right" color="secondary">
-          <mu-button icon>
-            <mu-icon value="notifications"></mu-icon>
-          </mu-button>
-        </mu-badge>
-        <mu-menu slot="right">
-          <mu-button flat>{{userid}}</mu-button>
-          <mu-list slot="content">
-            <mu-list-item button @click="logout">
-              <mu-list-item-content>
-                <mu-list-item-title>退出</mu-list-item-title>
-              </mu-list-item-content>
-            </mu-list-item>
-            <mu-list-item button @click="logout">
-              <mu-list-item-content>
-                <mu-list-item-title>修改密码</mu-list-item-title>
-              </mu-list-item-content>
-            </mu-list-item>
-          </mu-list>
-        </mu-menu>
-      </mu-appbar>
+      <header-login></header-login>
       <mu-row :column="2">
         <header-item></header-item>
         <mu-col width="98" tablet="98" desktop="98">
@@ -73,21 +51,10 @@ import base from '../libs/api.js'
                 </div>
               </div>
             </div>
-            <mu-dialog
-              title="退出"
-              width="600"
-              max-width="80%"
-              :esc-press-close="false"
-              :overlay-close="false"
-              :open.sync="openAlert"
-            >
-              确定退出登录吗？
-              <mu-button slot="actions" flat color="primary" @click="closeAlertDialog">取消</mu-button>
-              <mu-button slot="actions" flat color="primary" @click="tuichu">退出</mu-button>
-            </mu-dialog>
           </mu-row>
         </mu-col>
       </mu-row>
+      <logoutis></logoutis>
     </mu-container>
   </section>
 </template>
@@ -116,7 +83,7 @@ export default {
     }
   },
   mounted() {
-    fetch(this.Baseurl + "/common/getcoun", {
+    fetch("http://localhost/common/getcoun", {
       method: "GET",
       headers: {
         token: JSON.parse(localStorage.getItem("token"))

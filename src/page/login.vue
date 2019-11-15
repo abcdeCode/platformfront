@@ -44,7 +44,7 @@ export default {
   methods: {
     submit() {
       this.$refs.form.validate().then(result => {
-        fetch(this.Baseurl + "/plan/login", {
+        fetch("http://localhost/plan/login", {
           method: "POST",
           mode: "cors",
           headers: {

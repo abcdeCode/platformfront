@@ -1,29 +1,7 @@
 <template>
   <section>
     <mu-container class="demo-container">
-      <mu-appbar title="接口测试平台" :zDepth="3">
-        <mu-icon value="all_inclusive" color="#0091ea" slot="left"></mu-icon>
-        <mu-badge content="12" slot="right" color="secondary">
-          <mu-button icon>
-            <mu-icon value="notifications"></mu-icon>
-          </mu-button>
-        </mu-badge>
-        <mu-menu slot="right">
-          <mu-button flat>{{userid}}</mu-button>
-          <mu-list slot="content">
-            <mu-list-item button @click="logout">
-              <mu-list-item-content>
-                <mu-list-item-title>退出</mu-list-item-title>
-              </mu-list-item-content>
-            </mu-list-item>
-            <mu-list-item button @click="logout">
-              <mu-list-item-content>
-                <mu-list-item-title>修改密码</mu-list-item-title>
-              </mu-list-item-content>
-            </mu-list-item>
-          </mu-list>
-        </mu-menu>
-      </mu-appbar>
+      <header-login></header-login>
       <mu-row :column="2">
         <header-item></header-item>
         <mu-col width="98" tablet="98" desktop="98">
@@ -325,6 +303,7 @@
         </mu-col>
       </mu-row>
     </mu-container>
+    <logoutis></logoutis>
     <mu-dialog
       title="接口详情"
       width="600"
@@ -426,7 +405,7 @@ export default {
   mounted() {
     var that = this;
 
-    fetch(this.Baseurl + "/project/all", {
+    fetch("http://localhost/project/all", {
       method: "GET",
       mode: "cors",
       headers: {
@@ -453,7 +432,7 @@ export default {
     },
     interfacedetail(id) {
       this.detailopen = true;
-      fetch(this.Baseurl + "/interface/getinterface?interfaceid=" + id, {
+      fetch( "http://localhost/interface/getinterface?interfaceid=" + id, {
         method: "GET",
         headers: {
           token: JSON.parse(localStorage.getItem("token"))
@@ -484,8 +463,7 @@ export default {
       this.list1 = [];
       this.total = 1;
       fetch(
-        this.Baseurl +
-          "/interface/getpage?project=" +
+          "http://localhost/interface/getpage?project=" +
           this.getproject +
           "&page=" +
           this.current,
@@ -518,8 +496,7 @@ export default {
       this.list1 = [];
       this.total = 1;
       fetch(
-        this.Baseurl +
-          "/interface/getpage?project=" +
+          "http://localhost/interface/getpage?project=" +
           this.getproject +
           "&page=" +
           this.current,
@@ -561,7 +538,7 @@ export default {
       this.bianjiid = id;
       this.openAlertone = true;
       {
-        fetch(this.Baseurl + "/interface/getinterface?interfaceid=" + id, {
+        fetch("http://localhost/interface/getinterface?interfaceid=" + id, {
           method: "GET",
           headers: {
             token: JSON.parse(localStorage.getItem("token"))
@@ -593,9 +570,7 @@ export default {
     },
     delete1(id) {
       {
-        fetch(
-          this.Baseurl +
-            "/project/deleteproject?id=" +
+        fetch("http://localhost/project/deleteproject?id=" +
             id +
             "&userid=" +
             JSON.parse(localStorage.getItem("userid")),
@@ -634,7 +609,7 @@ export default {
     },
     append() {
       {
-        fetch(this.Baseurl + "/interface/create", {
+        fetch("http://localhost/interface/create", {
           method: "POST",
           mode: "cors",
           headers: {
@@ -684,7 +659,7 @@ export default {
     },
     bianji(id) {
       {
-        fetch(this.Baseurl + "/interface/change", {
+        fetch("http://localhost/interface/change", {
           method: "POST",
           mode: "cors",
           headers: {

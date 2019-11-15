@@ -15,6 +15,10 @@ import timed from "./page/timed.vue"
 import xingneng from "./page/xingneng.vue"
 import testevent from "./page/testevent.vue"
 import bianli from "./page/bianli.vue"
+import threoendconfig from "./page/threoendconfig.vue"
+import  sonnarconfig from "./page/sonnarconfig.vue"
+import sonnar from "./page/sonnar.vue"
+import whitelist from "./page/whitelist.vue"
 import { Script } from "vm"
 
 
@@ -36,12 +40,16 @@ Vue.component('header-item', {
             <div class='linktext'>项目管理 </div></router-link>
             <router-link to="/testevent">
       <div class='linktext'>测试环境  </div></router-link>
+      <router-link to="/sonnarconfig">
+      <div class='linktext'>扫描配置</div></router-link>
+      <router-link to="/threoendconfig">
+      <div class='linktext'>阀值配置</div></router-link>
   </mu-expansion-panel>
   <mu-expansion-panel :expand="panel === 'panel2'" @change="toggle('panel2')" style="background-color: #00142a;">
   <div slot="header" style='color: white'>接口</div>
   <router-link to="/interfaces">
   <div class='linktext'> 接口管理  </div></router-link>
-  <router-link to="/xingneng">
+  <router-link to="/whitelist">
   <div class='linktext'>白名单</div></router-link>
   <router-link to="/ca_se">
   <div class='linktext'>接口用例</div></router-link>
@@ -65,13 +73,58 @@ Vue.component('header-item', {
   <div class='linktext'>设备性能</div></router-link>
   <router-link to="/convage">
   <div class='linktext'>覆盖率</div></router-link>
-  <router-link to="/xingneng">
+  <router-link to="/sonnar">
   <div class='linktext'>安全扫描</div></router-link>
   </mu-expansion-panel>
   <mu-paper class="demo-paper" :z-depth="1" style="background-color: #00142a;"> <router-link to="/user">
   <div class='link_text'>用户管理</div></router-link></mu-paper>
   </mu-container>
   </templeate>`
+})
+Vue.component('header-login', {
+  props: [],
+  template: `<templeate >
+  <mu-appbar title="接口测试平台" :zDepth="3">
+  <mu-icon value="all_inclusive" color="#0091ea" slot="left"></mu-icon>
+  <mu-badge content="12" slot="right" color="secondary">
+    <mu-button icon>
+      <mu-icon value="notifications"></mu-icon>
+    </mu-button>
+  </mu-badge>
+  <mu-menu slot="right">
+    <mu-button flat>{{userid}}</mu-button>
+    <mu-list slot="content">
+      <mu-list-item button @click="logout">
+        <mu-list-item-content>
+          <mu-list-item-title>退出</mu-list-item-title>
+        </mu-list-item-content>
+      </mu-list-item>
+      <mu-list-item button>
+        <mu-list-item-content>
+          <mu-list-item-title>修改密码</mu-list-item-title>
+        </mu-list-item-content>
+      </mu-list-item>
+    </mu-list>
+  </mu-menu>
+</mu-appbar>
+  </templeate>`
+})
+Vue.component('logoutis', {
+  props: [],
+  template: `<templeate >
+  <mu-dialog
+  title="退出"
+  width="600"
+  max-width="80%"
+  :esc-press-close="false"
+  :overlay-close="false"
+  :open.sync="openAlert"
+>
+  确定退出登录吗？
+  <mu-button slot="actions" flat color="primary" @click="closeAlertDialog">取消</mu-button>
+  <mu-button slot="actions" flat color="primary" @click="tuichu">退出</mu-button>
+</mu-dialog>
+</templeate>`
 })
 var is_super = "localStorage.getItem('is_super')"
 var router = new VueRouter({
@@ -99,6 +152,26 @@ var router = new VueRouter({
       path: "/user",
       name: 'user',
       component: user
+    },
+    {
+      path: "/threoendconfig",
+      name: 'threoendconfig',
+      component: threoendconfig
+    },
+    {
+      path: "/sonnarconfig",
+      name: 'sonnarconfig',
+      component: sonnarconfig
+    },
+    {
+      path: "/sonnar",
+      name: 'sonnar',
+      component: sonnar
+    },
+    {
+      path:"/whitelist",
+      name: 'whitelist',
+      component: whitelist
     },
     {
       path: "/ca_se",
